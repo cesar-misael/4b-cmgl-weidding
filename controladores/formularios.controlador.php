@@ -8,7 +8,7 @@ class ControladorFormularios
     {
         if (isset($_POST["registerName"])) {
             /*return $_POST["registerName"] . "<br>" . $_POST["registerEmail"] . "<br>" .$_POST["registerPassword"] . "<br>";*/
-            $tabla = "registros_mac_wedding";
+            $tabla = "registros_cmgl_wedding";
 
             $datos = array(
                 "nombre" => $_POST["registerName"],
@@ -25,13 +25,13 @@ class ControladorFormularios
     static public function ctrSeleccionarRegistros($item, $valor)
     {
         if ($item == null && $valor == null) {
-            $tabla = "registros_mac_wedding";
+            $tabla = "cmgl";
 
             $respuesta = ModeloFormularios::mdlSeleccionarRegistros($tabla, null, null);
 
             return $respuesta;
         } else {
-            $tabla = "registros_mac_wedding";
+            $tabla = "cmgl";
 
             $respuesta = ModeloFormularios::mdlSeleccionarRegistros($tabla, $item, $valor);
 
@@ -45,7 +45,7 @@ class ControladorFormularios
     public function ctrIngreso()
     {
         if (isset($_POST["ingresoEmail"])) {
-            $tabla = "registros_mac_wedding";
+            $tabla = "cmgl";
             $item = "email";
             $valor = $_POST["ingresoEmail"];
 
@@ -67,6 +67,11 @@ class ControladorFormularios
                         }, 2000); // Redirecciona después de 2 segundos (ajusta el tiempo según tus preferencias)
                     </script>';
                 } else {
+                    $intentosd_fallidos = $respuesta["intentos_fallidos"] + 1;
+
+                    echo '<pre>'; print_r($intentosd_fallidos);echo '</pre>';
+
+
                     echo '<script>
                         if (window.history.replaceState){
                             window.history.replaceState(null, null, window.location.href);
@@ -96,7 +101,7 @@ class ControladorFormularios
             } else {
                 $password = $_POST["passwordActual"];
             }
-            $tabla = "registros_mac_wedding";
+            $tabla = "registros_cmgl_wedding";
 
             $datos = array(
                 "id" => $_POST["id"],
@@ -117,7 +122,7 @@ class ControladorFormularios
     {
         if (isset($_POST["deleteRegistro"])) {
 
-            $tabla = "registros_mac_wedding";
+            $tabla = "registros_cmgl_wedding";
             $valor = $_POST["deleteRegistro"];
 
 

@@ -89,5 +89,22 @@ class ModeloFormularios
         //$stmt->close();
         $stmt = null;
     }
+    /**
+     * Ctualizar intentos fallidos
+     */
+    static public function mdlActualizarIntentosFallidos($tabla, $valor)
+    {
+        $stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id=:id");
+
+        $stmt->bindParam(":id", $valor, PDO::PARAM_INT);
+
+        if ($stmt->execute()) {
+            return "ok";
+        } else {
+            print_r($stmt->errorInfo());
+        }
+        //$stmt->close();
+        $stmt = null;
+    }
 }
 ?>
